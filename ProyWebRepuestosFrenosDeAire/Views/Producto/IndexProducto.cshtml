@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Capa_Entidad.Producto>
+
+@{
+    ViewBag.Title = "IndexProducto";
+}
+
+<h2>IndexProducto</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <em> Articulo :</em> @Html.TextBox("nombre")
+        <button class="btn btn-info">Consultar</button>
+    </div>
+}
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-success">
+        <h4><strong>@TempData["mensaje"]</strong></h4>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Crear", "CreateProducto")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cod_produc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nom_pro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uni_med)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pre_pro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stk_pro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mat_pro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cod_prov)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nom_prov)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cod_cate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nom_cate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_produc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_pro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.uni_med)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pre_pro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stk_pro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mat_pro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_prov)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_prov)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_cate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_cate)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditProducto", new {  id=item.cod_produc }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Ver", "Details", new {  id=item.cod_produc  }) |
+                @Html.ActionLink("Eliminar", "DeleteProducto", new {  id=item.cod_produc })
+            </td>
+        </tr>
+    }
+
+</table>

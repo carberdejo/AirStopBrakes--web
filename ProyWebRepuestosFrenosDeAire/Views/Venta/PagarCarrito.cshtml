@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Capa_Entidad.Carrito>
+
+@{
+    ViewBag.Title = "PagarCarrito";
+}
+
+<h2>PagarCarrito</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        Cliente: @Html.TextBox("cli_cod", @Session["codigo"],
+         "Seleccione", new { @class = "form-select" })
+        <br />
+        <button type="submit" class="btn btn-primary">Pagar</button> |
+        @Html.ActionLink("Modificar Carrito", "IndexCarrito") |
+        @Html.ActionLink("Seguir Comprando", "IndexProductoCliente", "Producto")
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>Codigo </th>
+        <th>Nombre del Producto </th>
+        <th>Precio </th>
+        <th>Cantidad </th>
+        <th>Importe </th>
+        <th>Imagen</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.cod_produc </td>
+            <td>@item.nom_pro </td>
+            <td>@item.precio </td>
+            <td>@item.cantidad </td>
+            <td>@item.importe </td>
+            <td>
+                <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")"
+                     alt="@item.nom_pro"
+                     style="width:60px;height:60px" />
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="4">Cantidad de Articulos: @ViewBag.contador</td>
+        <td colspan="2">Total a Pagar: @ViewBag.suma_importe</td>
+    </tr>
+
+</table>
+<div class="alert alert-info">
+    @ViewBag.Mensaje
+</div>
+

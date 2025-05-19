@@ -1,0 +1,28 @@
+﻿@model Capa_Entidad.Usuario
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    @using (Html.BeginForm())
+    {
+        <div>
+            <label>Email</label>
+            @Html.TextBoxFor(m => m.cor_usu, new { @class = "form-control" })
+        </div>
+
+        <div>
+            <label>Contraseña</label>
+            @Html.PasswordFor(m => m.pass_usu, new { @class = "form-control" })
+        </div>
+
+        <button type="submit">Iniciar Sesión</button>
+    }
+</div>
+<div>
+    <h3>@ViewBag.Mensaje</h3>
+</div>

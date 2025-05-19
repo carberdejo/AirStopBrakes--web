@@ -1,0 +1,23 @@
+﻿
+@model Capa_Entidad.Usuario
+
+@using (Html.BeginForm("Login", "Acceso", FormMethod.Post))
+{
+    <div>
+        <label>Email</label>
+        @Html.TextBoxFor(m => m.cor_usu, new { @class = "form-control" })
+    </div>
+
+    <div>
+        <label>Contraseña</label>
+        @Html.PasswordFor(m => m.pass_usu, new { @class = "form-control" })
+    </div>
+
+    <button type="submit">Iniciar Sesión</button>
+}
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+﻿@model Capa_Entidad.Producto
+
+@{
+    ViewBag.Title = "AgregarProducto";
+}
+
+<h2>AgregarProducto</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cod_produc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cod_produc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_pro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_pro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_pro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_pro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stk_pro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stk_pro)
+        </dd>
+
+    </dl>
+    <div>
+        <img src="@Url.Content("~/Content/Productos/" + Model.cod_produc + ".jpg")"
+             alt="@Model.cod_produc"
+             style="width:160px;height:160px" />
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <em>Cantidad : </em> @Html.TextBox("Cantidad", "0", new { @type = "number", @min = 1, @max = Model.stk_pro })
+            <input type="submit" value="Agregar" class="btn btn-success" /> |
+            @Html.ActionLink("Seguir Comprando", "IndexProductoCliente","Producto", null, new { @class = "btn btn-primary" }) -
+            @Html.ActionLink("Ver Carrito", "IndexCarrito", null, new { @class = "btn btn-warning" })
+
+        </div>
+
+    }
+</div>
+<div>
+    <h4>@ViewBag.mensaje</h4>
+</div>

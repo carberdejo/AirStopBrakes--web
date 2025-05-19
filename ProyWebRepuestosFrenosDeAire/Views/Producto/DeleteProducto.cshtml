@@ -1,0 +1,105 @@
+﻿@model Capa_Entidad.Producto
+
+@{
+    ViewBag.Title = "DeleteProducto";
+}
+
+<h2>DeleteProducto</h2>
+
+<h3>Seguro que quiere eliminar el producto @Model.nom_pro ?</h3>
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cod_produc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cod_produc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_pro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_pro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uni_med)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uni_med)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_pro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_pro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stk_pro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stk_pro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_pro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_pro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cod_prov)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cod_prov)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_prov)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_prov)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cod_cate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cod_cate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_cate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_cate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-warning" 
+                   onclick="return confirm('Seguro que quieres eliminar este producto')"   /> |
+            @Html.ActionLink("Regresar", "IndexProducto",null,new { @class = "btn btn-warning" })
+        </div>
+    }
+</div>

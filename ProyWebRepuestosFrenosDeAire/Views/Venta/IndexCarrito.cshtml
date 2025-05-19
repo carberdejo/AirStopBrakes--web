@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Capa_Entidad.Carrito>
+
+@{
+    ViewBag.Title = "IndexCarrito";
+}
+
+<h2>IndexCarrito</h2>
+
+<p>
+    @Html.ActionLink("Seguir Comprando", "ListarArticulos") |
+    @Html.ActionLink("Realizar Pago", "PagarCarrito")
+</p>
+
+@if (TempData["Mensaje"] != null)
+{
+    <br />
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@TempData["Mensaje"].ToString()!</strong>
+        <button type="button" class="btn-close"
+                data-bs-dismiss="alert" aria-label="Close">
+        </button>
+    </div>
+    <br />
+}
+
+<table class="table">
+    <tr>
+        <th>Codigo </th>
+        <th>Nombre del Producto </th>
+        <th>Precio </th>
+        <th>Cantidad </th>
+        <th>Importe </th>
+        <th>Imagen</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.cod_produc </td>
+            <td>@item.nom_pro </td>
+            <td>@item.precio </td>
+            <td>@item.cantidad </td>
+            <td>@item.importe </td>
+            <td>
+                <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")"
+                     alt="@item.nom_pro"
+                     style="width:60px;height:60px" />
+            </td>
+            <td>
+
+                @Html.ActionLink("Eliminar", "EliminarItemCarrito", new { id = item.cod_produc }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="3">Cantidad de Items: @ViewBag.contador</td>
+        <td colspan="3">Importe Total: @ViewBag.suma_importe</td>
+    </tr>
+
+</table>
