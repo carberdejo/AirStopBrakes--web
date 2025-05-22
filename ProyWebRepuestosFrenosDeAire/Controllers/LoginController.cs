@@ -12,6 +12,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
     public class LoginController : Controller
     {
         LoginBussiness log = new LoginBussiness();
+        DistritoBussiness dist = new DistritoBussiness();
 
         // GET: Login
         public ActionResult Login()
@@ -50,6 +51,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
 
         public ActionResult Registrar()
         {
+            ViewBag.listDist = new SelectList(dist.listaDistrito(), "cod_dist", "nom_dist");
             return View(new Usuario());
         }
 
@@ -68,8 +70,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             {
                 ViewBag.mensaje = e.Message;
             }
-            //ViewBag.listProv = new SelectList(prodBussiness.listaProveedor(), "cod_prov", "nom_prov");
-            //ViewBag.listCate = new SelectList(prodBussiness.listaCategoria(), "cod_cate", "nom_cate");
+            ViewBag.listDist = new SelectList(dist.listaDistrito(), "cod_dist", "nom_dist");
             return View(obj);
         }
     }

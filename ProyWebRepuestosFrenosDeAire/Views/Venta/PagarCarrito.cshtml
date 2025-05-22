@@ -9,8 +9,8 @@
 @using (Html.BeginForm())
 {
     <div>
-        Cliente: @Html.TextBox("cli_cod", @Session["codigo"],
-         "Seleccione", new { @class = "form-select" })
+        @Session["codigo"]
+        Cliente: @Html.TextBox("id", (string) @Session["codigo"], new { @class = "form-select" })
         <br />
         <button type="submit" class="btn btn-primary">Pagar</button> |
         @Html.ActionLink("Modificar Carrito", "IndexCarrito") |
@@ -50,6 +50,7 @@
 
 </table>
 <div class="alert alert-info">
+   
     @ViewBag.Mensaje
 </div>
 

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Carrito.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="Distrito.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Producto.cs" />

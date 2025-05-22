@@ -12,7 +12,12 @@ namespace Capa_Datos
         {
             try
             {
-                string codigo = Convert.ToString(DBHelper.EjecutarSP_TRX_Object("PA_GRABAR_VENTA_IGV", cod_usu, total_vent));
+                object resultado = DBHelper.RetornaScalar("PA_GRABAR_VENTA_IGV", cod_usu, total_vent);
+                if(resultado == null)
+                {
+                    throw new Exception("El procedimiento no devolvió ningún número de venta.");
+                }
+                string codigo = Convert.ToString(resultado);
                 return codigo;
             }
             catch(Exception e) {
