@@ -12,7 +12,7 @@ namespace Capa_Datos
 {
     public class LoginDAO
     {
-
+        string RolUsuario = "R01";
         public bool ValidarUsuario(string email, string password) {
 
             DataTable dt = DBHelper.RetornaDataTable("SP_VALIDAR_USUARIO", email, password);
@@ -34,6 +34,7 @@ namespace Capa_Datos
                 HttpContext.Current.Session["nombre"] = dr["nom_usu"];
                 HttpContext.Current.Session["rol"] = dr["cod_rol"];
                 HttpContext.Current.Session["email"] = dr["cor_usu"];
+                HttpContext.Current.Session["apellido"] = dr["ape_usu"];
 
                 return true;
             }
@@ -44,21 +45,50 @@ namespace Capa_Datos
         {
             try
             {
-                DataTable dt = DBHelper.RetornaDataTable("PA_REGISTRAR_USUARIO", obj.nom_usu, obj.tel_usu, obj.cor_usu,
+                object codUsuario = DBHelper.EjecutarSP_TRX_Object("PA_REGISTRAR_USUARIO", obj.nom_usu,obj.ape_usu, obj.tel_usu, obj.cor_usu,
                                                          obj.pass_usu, obj.fec_nac, obj.cod_dist);
 
-                if (dt.Rows.Count == 1)
-                {
-                    DataRow dr = dt.Rows[0];
-                    HttpContext.Current.Session["codigo"] = dr["codigo"];
+                    string codigo = codUsuario.ToString();
+                HttpContext.Current.Session["codigo"] = codigo;
                     HttpContext.Current.Session["correo"] = obj.cor_usu;
                     HttpContext.Current.Session["nombre"] = obj.nom_usu;
-                    HttpContext.Current.Session["rol"] = dr["rol"];
+                    HttpContext.Current.Session["apellido"] = obj.ape_usu;
+                    HttpContext.Current.Session["rol"] = RolUsuario;
+                    HttpContext.Current.Session["email"] = obj.cor_usu;
 
 
-                    return "Usuario registrado correctamente";
-                }
-                return "No se registro";
+                    return $"Usuario {codigo} registrado correctamente";
+                
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error" + e.Message);
+            }
+        }
+
+        public List<Usuario> ListatUsuarios()
+        {
+            List<Usuario> lista = new List<Usuario>();
+            DataTable dt = DBHelper.RetornaDataTable("SP_LISTA_USUARIO");
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(dt);
+            lista = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Usuario>>(json);
+        
+            return lista;
+        }
+
+        public string ActualizarUsuario(Usuario obj)
+        {
+            try
+            {
+                DBHelper.EjecutarSP("SP_UPDATE_USUARIO", obj.cod_usu, obj.nom_usu,obj.ape_usu ,obj.tel_usu, obj.cor_usu,
+                                                         obj.pass_usu, obj.fec_nac, obj.cod_dist);
+
+                HttpContext.Current.Session["correo"] = obj.cor_usu;
+                HttpContext.Current.Session["nombre"] = obj.nom_usu;
+                HttpContext.Current.Session["apellido"] = obj.ape_usu;
+
+                return "Usuario actualizado correctamente";
+                              
             }
             catch (Exception e)
             {

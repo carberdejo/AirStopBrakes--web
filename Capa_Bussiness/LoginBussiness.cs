@@ -29,5 +29,25 @@ namespace Capa_Bussiness
                 throw new Exception("Error" + e.Message);
             }
         }
+
+        public string ActualizarUsuario(Usuario obj)
+        {
+            try
+            {
+                dao.ActualizarUsuario(obj);
+
+                return "Usuario actualizado correctamente";
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error" + e.Message);
+            }
+        }
+
+        public List<Usuario> ListatUsuarios()
+        {
+            return dao.ListatUsuarios();
+        }
     }
 }

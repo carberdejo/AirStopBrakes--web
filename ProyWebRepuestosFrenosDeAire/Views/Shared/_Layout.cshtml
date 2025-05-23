@@ -6,11 +6,10 @@
     <title>@ViewBag.Title - RepuestosCAR</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/Styles/Navbar.css" rel="stylesheet" />
 
-    <!-- Agrega esto dentro de <head> -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <link href="~/Content/Styles/Navbar.css" rel="stylesheet" />
 
     <style>
         .bg-azul-oscuro {
@@ -117,22 +116,38 @@
                         <a class="nav-link dropdown-toggle" href="#" id="productosDropdown">Mantenimiento</a>
                         <ul class="dropdown-menu" aria-labelledby="productosDropdown">
                             <li>@Html.ActionLink("Productos", "IndexProducto", "Producto", null, new { @class = "dropdown-item" })</li>
-                            <li>@Html.ActionLink("Proveedores", "IndexProducto", "Producto", null, new { @class = "dropdown-item" })</li>
-                            <li>@Html.ActionLink("Clientes", "IndexProducto", "Producto", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Proveedores", "IndexProveedor", "Proveedor", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Clientes", "IndexUsuario", "Login", null, new { @class = "dropdown-item" })</li>
                         </ul>
 
                     </li>
                 </ul>
-
+               
                 <!-- Iconos derecha -->
                 <div class="nav-icons d-flex align-items-center">
                     <!-- Carrito -->
                     <div class="dropdown-cart position-relative">
                         <i class="fas fa-shopping-cart" id="cartIcon"></i>
                         <div class="dropdown-menu-cart shadow rounded">
-                            <div class="cart-product">Producto 1 - S/ 50.00</div>
-                            <div class="cart-product">Producto 2 - S/ 75.00</div>
-                            <a href="@Url.Action("IndexCarrito", "Venta")" class="btn btn-primary btn-sm w-100 mt-2">Ir al Carrito</a>
+                            @if (Session["Carrito"] != null)
+                            {
+                                var lista = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Capa_Entidad.Carrito>>((string)Session["carrito"]);
+
+                            
+                            if (lista.Count > 0)
+                            {
+                                foreach (var item in lista)
+                                {
+                                    <div class="cart-product">@item.nom_pro -  S/ @item.importe</div>
+                                }
+                                <a href="@Url.Action("IndexCarrito", "Venta")" class="btn btn-primary btn-sm w-100 mt-2">Ir al Carrito</a>
+                            }
+                            else
+                            {
+                                <strong>No hay productos en el carrito  </strong>
+                            }
+                            }
+
                         </div>
                     </div>
 
@@ -142,7 +157,9 @@
                            " data-bs-toggle="dropdown" aria-expanded="false"></i>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-user" aria-labelledby="userDropdown">
                             <li><h6 class="dropdown-header">Hola, @Session["nombre"]</h6></li>
-                            <li><a class="dropdown-item" href="@Url.Action("Perfil", "Usuario")">Perfil</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("DetailsUsuario", "Login",new { id = Session["codigo"] })">Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="@Url.Action("ActualizarUsuario", "Login",new { id = Session["codigo"] })">Editar</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="@Url.Action("Logout", "Login")">Cerrar Sesión</a></li>
                         </ul>

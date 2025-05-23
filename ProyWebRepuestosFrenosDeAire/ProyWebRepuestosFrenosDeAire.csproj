@@ -123,6 +123,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -196,6 +197,14 @@
     <Content Include="Views\Venta\AgregarProducto.cshtml" />
     <Content Include="Views\Venta\PagarCarrito.cshtml" />
     <Content Include="Views\Home\IndexProductoCategoria.cshtml" />
+    <Content Include="Views\Proveedor\IndexProveedor.cshtml" />
+    <Content Include="Views\Proveedor\CreateProveedor.cshtml" />
+    <Content Include="Views\Proveedor\DetailsProveedor.cshtml" />
+    <Content Include="Views\Proveedor\EditProveedor.cshtml" />
+    <Content Include="Views\Proveedor\DeleteProveedor.cshtml" />
+    <Content Include="Views\Login\IndexUsuario.cshtml" />
+    <Content Include="Views\Login\ActualizarUsuario.cshtml" />
+    <Content Include="Views\Login\DetailsUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

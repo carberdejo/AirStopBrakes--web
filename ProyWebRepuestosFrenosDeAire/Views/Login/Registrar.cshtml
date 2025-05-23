@@ -1,80 +1,79 @@
 ﻿@model Capa_Entidad.Usuario
 
 @{
-    ViewBag.Title = "Registrar";
+    ViewBag.Title = "Registro de Usuario";
 }
 
-<h2>Registrar</h2>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3><i class="bi bi-person-plus-fill"></i> Registro de Usuario</h3>
+                </div>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Usuario</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.nom_usu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nom_usu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nom_usu, "", new { @class = "text-danger" })
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.nom_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.nom_usu, new { @class = "form-control", placeholder = "Nombre completo" })
+                    @Html.ValidationMessageFor(model => model.nom_usu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.ape_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.ape_usu, new { @class = "form-control", placeholder = "Apellido completo" })
+                    @Html.ValidationMessageFor(model => model.ape_usu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.tel_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.tel_usu, new { @class = "form-control", placeholder = "Teléfono o celular" })
+                    @Html.ValidationMessageFor(model => model.tel_usu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.cor_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.cor_usu, new { @class = "form-control", placeholder = "Correo electrónico" })
+                    @Html.ValidationMessageFor(model => model.cor_usu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.pass_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.PasswordFor(model => model.pass_usu, new { @class = "form-control", placeholder = "Contraseña" })
+                    @Html.ValidationMessageFor(model => model.pass_usu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.fec_nac, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.fec_nac, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(model => model.fec_nac, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.cod_dist, htmlAttributes: new { @class = "form-label" })
+                    @Html.DropDownList("cod_dist", (SelectList)ViewBag.listdist, "Seleccionar distrito", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.cod_dist, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Registrar Usuario" class="btn btn-danger px-5" />
+                </div>
             </div>
-        </div>
+                }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.tel_usu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tel_usu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tel_usu, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.cor_usu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cor_usu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cor_usu, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.pass_usu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.pass_usu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.pass_usu, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.fec_nac, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fec_nac, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fec_nac, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.cod_dist, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("cod_dist", (SelectList)ViewBag.listdist, "Seleccionar", new { @class = "form-select" })
-                @Html.ValidationMessageFor(model => model.cod_dist, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <div class="card-footer text-center">
+                    <button class="btn btn-secondary me-2" onclick="window.history.back();">Volver</button>
+                    @Html.ActionLink("Iniciar Sesión", "Login", null, new { @class = "btn btn-outline-dark" })
+                </div>
             </div>
         </div>
     </div>
-}
-
+</div>
 <div>
-    <button onclick="window.history.back();">Volver</button>
-    @Html.ActionLink("Iniciar Sesion","Login")
+    @ViewBag.mensaje
 </div>

@@ -13,5 +13,6 @@ namespace Capa_Entidad
         public string pais_origen { get; set; }
         public string email { get; set; }
         public string telefono { get; set; }
+        public string eli_prov { get; set; }
     }
 }

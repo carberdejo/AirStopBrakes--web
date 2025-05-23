@@ -1,0 +1,72 @@
+﻿@model Capa_Entidad.Proveedor
+
+@{
+    ViewBag.Title = "DeleteProveedor";
+}
+
+<h2>DeleteProveedor</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Proveedor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cod_prov)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cod_prov)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_prov)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_prov)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pais_origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pais_origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eli_prov)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eli_prov)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "IndexProveedor")
+        </div>
+    }
+</div>

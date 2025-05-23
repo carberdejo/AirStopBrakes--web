@@ -9,61 +9,45 @@ using Capa_Entidad;
 
 namespace Capa_Bussiness
 {
-    public class ProductoBussiness
+    public class ProveedorBussiness
     {
-        ProductosDAO dao = new ProductosDAO();
-
-        public List<Producto> listaProducto(string nombre)
+        ProveedorDAO dao = new ProveedorDAO();
+        public List<Proveedor> listaProveedor()
         {
-            return dao.listaProducto(nombre);
+            return dao.listaProveedor();
         }
-        public List<Producto> listaProductoCate(string cod_cate, string nombre)
-        {
-            return dao.listaProductoCate(cod_cate, nombre);
-        }
-
-        public string GrabarProducto(Producto obj)
+        public string GrabarProveedor(Proveedor obj)
         {
             try
             {
-                return dao.GrabarProducto(obj);
+                return dao.GrabarProveedor(obj);
             }
             catch (Exception e)
             {
                 throw new Exception("Error" + e.Message);
             }
         }
-
-        public string UpdateProducto(Producto obj)
+        public string UpdateProveedor(Proveedor obj)
         {
             try
             {
-                return dao.UpdateProducto(obj);
+                return dao.UpdateProveedor(obj);
             }
             catch (Exception e)
             {
                 throw new Exception("Error" + e.Message);
             }
         }
-
-        public string DeleteProducto(string id)
+        public string DeleteProveedor(string id)
         {
             try
             {
-                return dao.DeleteProducto(id);
+                return dao.DeleteProveedor(id);
             }
             catch (Exception e)
             {
                 throw new Exception("Error" + e.Message);
             }
         }
-
-
-        public List<Categoria> listaCategoria()
-        {
-            return dao.listaCategoria();
-        }
-
-
     }
 }

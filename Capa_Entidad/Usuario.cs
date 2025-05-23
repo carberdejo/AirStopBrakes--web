@@ -10,6 +10,7 @@ namespace Capa_Entidad
     {
         public string cod_usu { get; set; }
         public string nom_usu { get; set; }
+        public string ape_usu { get; set; }
         public string tel_usu { get; set; }
         public string cor_usu { get; set; }
         public string pass_usu { get; set; }

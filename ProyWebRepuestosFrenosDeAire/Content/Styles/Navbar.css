@@ -1,4 +1,27 @@
 ﻿/* Estilo navbar */
+
+.bg-azul-oscuro {
+    background-color: #0d3b66 !important;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.dropdown-cart,
+.dropdown-user {
+    position: relative;
+}
+
+
+
+.cart-product {
+    border-bottom: 1px solid #eee;
+    padding: 5px 0;
+}
+
+
+
 .navbar-custom {
     background-color: #0d1b2a;
 }
@@ -49,6 +72,7 @@
     display: none;
     z-index: 999;
     width: 250px;
+    max-width: 280px;
 }
 
 .dropdown-cart:hover .dropdown-menu-cart {

@@ -51,6 +51,7 @@
     <Compile Include="ProductosDAO.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProveedorDAO.cs" />
     <Compile Include="VentasDAO.cs" />
   </ItemGroup>
   <ItemGroup>

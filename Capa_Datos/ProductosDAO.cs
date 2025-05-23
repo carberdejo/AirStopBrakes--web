@@ -11,15 +11,6 @@ namespace Capa_Datos
 {
     public class ProductosDAO
     {
-        public List<Proveedor> listaProveedor()
-        {
-            var lista = new List<Proveedor>();
-            DataTable dt = DBHelper.RetornaDataTable("SP_LISTA_PROVEEDOR");
-            string cad_json = JsonConvert.SerializeObject(dt);
-            lista = JsonConvert.DeserializeObject<List<Proveedor>>(cad_json);
-
-            return lista;
-        }
 
         public List<Categoria> listaCategoria()
         {

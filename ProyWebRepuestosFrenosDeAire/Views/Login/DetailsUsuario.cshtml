@@ -1,0 +1,90 @@
+﻿@model Capa_Entidad.Usuario
+
+@{
+    ViewBag.Title = "DetailsUsuario";
+}
+
+<h2>DetailsUsuario</h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cod_usu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cod_usu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_usu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_usu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ape_usu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ape_usu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tel_usu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tel_usu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cor_usu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cor_usu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pass_usu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pass_usu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fec_nac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fec_nac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cod_dist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cod_dist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cod_rol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cod_rol)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

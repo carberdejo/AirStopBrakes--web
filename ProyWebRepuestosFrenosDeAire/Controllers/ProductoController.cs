@@ -14,6 +14,8 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
     {
 
         ProductoBussiness prodBussiness = new ProductoBussiness();
+        ProveedorBussiness provB= new ProveedorBussiness();
+
         List<Carrito> listCarrito = new List<Carrito>();
         Producto buscarProduc(string id)
         {
@@ -49,7 +51,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         // GET: Producto/Create
         public ActionResult CreateProducto()
         {
-            ViewBag.listProv = new SelectList(prodBussiness.listaProveedor(), "cod_prov", "nom_prov");
+            ViewBag.listProv = new SelectList(provB.listaProveedor(), "cod_prov", "nom_prov");
             ViewBag.listCate = new SelectList(prodBussiness.listaCategoria(), "cod_cate", "nom_cate");
             return View(new Producto());
         }
@@ -70,7 +72,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             {
                 ViewBag.mensaje = e.Message;
             }
-            ViewBag.listProv = new SelectList(prodBussiness.listaProveedor(), "cod_prov", "nom_prov");
+            ViewBag.listProv = new SelectList(provB.listaProveedor(), "cod_prov", "nom_prov");
             ViewBag.listCate = new SelectList(prodBussiness.listaCategoria(), "cod_cate", "nom_cate");
             return View(obj);
         }
@@ -78,7 +80,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         // GET: Producto/Edit/5
         public ActionResult EditProducto(string id)
         {
-            ViewBag.listProv = new SelectList(prodBussiness.listaProveedor(), "cod_prov", "nom_prov");
+            ViewBag.listProv = new SelectList(provB.listaProveedor(), "cod_prov", "nom_prov");
             ViewBag.listCate = new SelectList(prodBussiness.listaCategoria(), "cod_cate", "nom_cate");
             return View( buscarProduc(id) );
         }
@@ -99,7 +101,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             {
                 ViewBag.mensaje = e.Message;
             }
-            ViewBag.listProv = new SelectList(prodBussiness.listaProveedor(), "cod_prov", "nom_prov");
+            ViewBag.listProv = new SelectList(provB.listaProveedor(), "cod_prov", "nom_prov");
             ViewBag.listCate = new SelectList(prodBussiness.listaCategoria(), "cod_cate", "nom_cate");
             return View(obj);
         }
