@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Capa_Entidad.Producto>
+
+@{
+    ViewBag.Title = "Catálogo de Productos";
+}
+<link href="~/Content/Styles/estilosProductos.css" rel="stylesheet" />
+<h2 class="text-center mb-4">Catálogo de Productos</h2>
+
+
+<h4>Bienvenido, @Session["nombre"] ,@Session["codigo"],@Session["rol"],@Session["email"], </h4>
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Details", "Producto", new {  id=item.cod_produc })">
+                <div class="card h-100 shadow-sm">
+                    <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")"
+                         alt="Imagen de @item.nom_pro"
+                         class="card-img-top"
+                         style="height: 200px; object-fit: cover; border-bottom: 1px solid #eee;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.nom_pro</h5>
+                        <p class="card-text">
+                            <strong>Precio:</strong> S/. @item.pre_pro <br />
+                            @if (!string.IsNullOrEmpty(item.uni_med))
+                            {
+                                <small class="text-muted">Unidad: @item.uni_med</small>
+                            }
+                        </p>
+                        <a href="@Url.Action("AgregarProducto","Venta",new {id= item.cod_produc})" class="btn btn-primary">Agregar al carrito</a>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    }
+</div>

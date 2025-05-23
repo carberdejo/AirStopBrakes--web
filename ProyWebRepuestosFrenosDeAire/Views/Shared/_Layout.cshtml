@@ -1,39 +1,164 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - RepuestosCAR</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Styles/Navbar.css" rel="stylesheet" />
+
+    <!-- Agrega esto dentro de <head> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <style>
+        .bg-azul-oscuro {
+            background-color: #0d3b66 !important;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .dropdown-cart,
+        .dropdown-user {
+            position: relative;
+        }
+
+        .dropdown-menu-cart {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            min-width: 300px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .dropdown-menu-user {
+            right: 0;
+            left: auto;
+            min-width: 200px;
+        }
+
+        .dropdown-cart:hover .dropdown-menu-cart {
+            display: block;
+        }
+
+        .dropdown-user:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-icons i {
+            font-size: 1.3rem;
+            color: white;
+            margin-left: 1rem;
+            cursor: pointer;
+        }
+
+        .cart-product {
+            border-bottom: 1px solid #eee;
+            padding: 5px 0;
+        }
+
+        .nav-icons i {
+            font-size: 1.4rem; /* Tamaño más grande */
+            color: white !important; /* Blanco asegurado */
+            margin-left: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+            .nav-icons i:hover {
+                transform: scale(1.2); /* Efecto al pasar el mouse */
+                color: #e0e0e0; /* Color ligeramente gris al hacer hover */
+            }
+    </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-azul-oscuro">
         <div class="container">
-            @Html.ActionLink("RepuestosCAR", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+            <!-- Logo -->
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                <img src="~/Content/Productos/LOGO.png" alt="Logo" />
+            </a>
+
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Productos", "IndexProductoCliente", "Producto", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Cerrar Sesion", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Carrito", "IndexCarrito", "Venta", new { area = "" }, new { @class = "nav-link" })</li>
+            @{
+                var pro = new List<Capa_Entidad.Categoria>();
+                var obj = new Capa_Bussiness.ProductoBussiness();
+                pro = obj.listaCategoria();
+            }
+            <!-- Nav items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Acerca de", "About", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item dropdown position-relative">
+                        <a class="nav-link dropdown-toggle" href="#" id="productosDropdown">Productos</a>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                            @foreach (var item in pro)
+                            {
+                                <li>@Html.ActionLink(item.nom_cate, "IndexProductoCategoria", "Home", new { id = item.cod_cate }, new { @class = "dropdown-item" })</li>
+                            }
+                        </ul>
 
+                    </li>
+                    <li class="nav-item dropdown position-relative">
+                        <a class="nav-link dropdown-toggle" href="#" id="productosDropdown">Mantenimiento</a>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                            <li>@Html.ActionLink("Productos", "IndexProducto", "Producto", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Proveedores", "IndexProducto", "Producto", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Clientes", "IndexProducto", "Producto", null, new { @class = "dropdown-item" })</li>
+                        </ul>
+
+                    </li>
                 </ul>
+
+                <!-- Iconos derecha -->
+                <div class="nav-icons d-flex align-items-center">
+                    <!-- Carrito -->
+                    <div class="dropdown-cart position-relative">
+                        <i class="fas fa-shopping-cart" id="cartIcon"></i>
+                        <div class="dropdown-menu-cart shadow rounded">
+                            <div class="cart-product">Producto 1 - S/ 50.00</div>
+                            <div class="cart-product">Producto 2 - S/ 75.00</div>
+                            <a href="@Url.Action("IndexCarrito", "Venta")" class="btn btn-primary btn-sm w-100 mt-2">Ir al Carrito</a>
+                        </div>
+                    </div>
+
+                    <!-- Usuario -->
+                    <div class="dropdown dropdown-user ms-3">
+                        <i class="fas fa-user" id="userIcon
+                           " data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-user" aria-labelledby="userDropdown">
+                            <li><h6 class="dropdown-header">Hola, @Session["nombre"]</h6></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Perfil", "Usuario")">Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Logout", "Login")">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+        
+       
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - RepuestosCAR</p>
         </footer>
     </div>
 

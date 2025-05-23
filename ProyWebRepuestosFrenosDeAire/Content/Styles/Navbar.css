@@ -1,0 +1,69 @@
+﻿/* Estilo navbar */
+.navbar-custom {
+    background-color: #0d1b2a;
+}
+
+.nav-link, .navbar-brand {
+    color: white !important;
+}
+
+    .nav-link:hover {
+        color: #a3cef1 !important;
+    }
+
+/* Íconos */
+.nav-icons i {
+    font-size: 1.6rem;
+    color: white !important;
+    margin-left: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+    .nav-icons i:hover {
+        transform: scale(1.2);
+        color: #e0e0e0;
+    }
+
+/* Submenú de productos en hover */
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+.dropdown-menu {
+    background-color: white;
+    border-radius: 0.3rem;
+}
+
+/* Mini carrito */
+.dropdown-menu-cart {
+    position: absolute;
+    right: 0;
+    top: 2.5rem;
+    background-color: white;
+    color: black;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 1rem;
+    display: none;
+    z-index: 999;
+    width: 250px;
+}
+
+.dropdown-cart:hover .dropdown-menu-cart {
+    display: block;
+}
+
+.dropdown-menu-user {
+    min-width: 150px;
+}
+
+    .dropdown-menu-user a {
+        color: #000;
+    }
+
+        .dropdown-menu-user a:hover {
+            background-color: #f0f0f0;
+        }body {
+}

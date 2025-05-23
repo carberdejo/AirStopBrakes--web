@@ -17,6 +17,10 @@ namespace Capa_Bussiness
         {
             return dao.listaProducto(nombre);
         }
+        public List<Producto> listaProductoCate(string cod_cate, string nombre)
+        {
+            return dao.listaProductoCate(cod_cate, nombre);
+        }
 
         public string GrabarProducto(Producto obj)
         {

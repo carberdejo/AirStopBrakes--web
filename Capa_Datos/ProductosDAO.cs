@@ -41,6 +41,16 @@ namespace Capa_Datos
             return lista;
         }
 
+        public List<Producto> listaProductoCate(string cod_cate,string nombre)
+        {
+            var lista = new List<Producto>();
+            DataTable dt = DBHelper.RetornaDataTable("SP_LISTA_PRODUCTOS_CATE", cod_cate, nombre);
+            string cad_json = JsonConvert.SerializeObject(dt);
+            lista = JsonConvert.DeserializeObject<List<Producto>>(cad_json);
+
+            return lista;
+        }
+
         public string GrabarProducto(Producto obj)
         {
             try

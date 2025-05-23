@@ -147,8 +147,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\estilosProductos.css" />
+    <Content Include="Content\Styles\estilosProductos.css" />
     <Content Include="Content\Productos\P0001.jpg" />
+    <Content Include="Content\Styles\Navbar.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -180,7 +181,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Producto\IndexProducto.cshtml" />
@@ -195,6 +195,7 @@
     <Content Include="Views\Venta\IndexCarrito.cshtml" />
     <Content Include="Views\Venta\AgregarProducto.cshtml" />
     <Content Include="Views\Venta\PagarCarrito.cshtml" />
+    <Content Include="Views\Home\IndexProductoCategoria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

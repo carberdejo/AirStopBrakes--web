@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Capa_Bussiness;
+using Capa_Entidad;
+using Newtonsoft.Json;
 
 
 namespace ProyWebRepuestosFrenosDeAire.Controllers
@@ -11,14 +14,21 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
     {
         public ActionResult Index()
         {
+            List<Carrito> listCarrito = new List<Carrito>();
+            //Si la variable de session no existe
+            if (Session["Carrito"] == null)
+            {
+                Session["Carrito"] = JsonConvert.SerializeObject(listCarrito);
+            }
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult IndexProductoCategoria(string id = "CA001" ,string nombre = "")
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            ProductoBussiness prodBussiness = new ProductoBussiness();
+            
+            var lista = prodBussiness.listaProductoCate(id, nombre);
+            return View(lista);
         }
 
         public ActionResult Contact()
