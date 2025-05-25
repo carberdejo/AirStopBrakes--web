@@ -128,7 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Permisos\ValidarSession.cs" />
+    <Compile Include="Permisos\ValidarSessionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +150,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Styles\estilosProductos.css" />
     <Content Include="Content\Productos\P0001.jpg" />
+    <Content Include="Content\Styles\Home.css" />
     <Content Include="Content\Styles\Navbar.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -187,9 +188,7 @@
     <Content Include="Views\Producto\IndexProducto.cshtml" />
     <Content Include="Views\Producto\CreateProducto.cshtml" />
     <Content Include="Views\Producto\EditProducto.cshtml" />
-    <Content Include="Views\Producto\Details.cshtml" />
     <Content Include="Views\Producto\DeleteProducto.cshtml" />
-    <Content Include="Views\Producto\IndexProductoCliente.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\LoginUser.cshtml" />
     <Content Include="Views\Login\Registrar.cshtml" />
@@ -205,6 +204,8 @@
     <Content Include="Views\Login\IndexUsuario.cshtml" />
     <Content Include="Views\Login\ActualizarUsuario.cshtml" />
     <Content Include="Views\Login\DetailsUsuario.cshtml" />
+    <Content Include="Views\Producto\DetailsStock.cshtml" />
+    <Content Include="Views\Home\IndexProductoCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

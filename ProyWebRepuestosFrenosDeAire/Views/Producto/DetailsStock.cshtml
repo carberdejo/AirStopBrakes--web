@@ -1,0 +1,71 @@
+﻿@model Capa_Entidad.Producto
+
+@{
+    ViewBag.Title = "Detalle de Stock";
+}
+
+<div class="container mt-4">
+    <div class="card shadow rounded">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Detalle de Producto</h4>
+        </div>
+
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                <div class="row g-2 mb-4 align-items-center">
+                    <div class="col-md-10">
+                        @Html.TextBox("newStock", null, new { @class = "form-control", placeholder = "Agregar stock adicional" })
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-outline-primary w-100" type="submit">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            }
+
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <th>Código</th>
+                        <td>@Model.cod_produc</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <td>@Model.nom_pro</td>
+                    </tr>
+                    <tr>
+                        <th>Unidad de Medida</th>
+                        <td>@Model.uni_med</td>
+                    </tr>
+                    <tr>
+                        <th>Precio</th>
+                        <td>S/ @Model.pre_pro</td>
+                    </tr>
+                    <tr>
+                        <th>Stock Actual</th>
+                        <td>@Model.stk_pro unidades</td>
+                    </tr>
+                    <tr>
+                        <th>Material</th>
+                        <td>@Model.mat_pro</td>
+                    </tr>
+                    <tr>
+                        <th>Proveedor</th>
+                        <td>@Model.nom_prov <strong>(@Model.cod_prov)</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Categoría</th>
+                        <td>@Model.nom_cate <strong>(@Model.cod_cate)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="mt-4 d-flex justify-content-between">
+                @Html.ActionLink("Editar", "EditProducto", new { id = Model.cod_produc }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Regresar", "IndexProducto", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+    </div>
+</div>

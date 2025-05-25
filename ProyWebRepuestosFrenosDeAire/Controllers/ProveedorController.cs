@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using Capa_Bussiness;
 using Capa_Entidad;
+using ProyWebRepuestosFrenosDeAire.Permisos;
 
 namespace ProyWebRepuestosFrenosDeAire.Controllers
 {
+    [ValidarSession]
     public class ProveedorController : Controller
     {
         ProveedorBussiness prov = new ProveedorBussiness();

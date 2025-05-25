@@ -4,100 +4,86 @@
     ViewBag.Title = "IndexProducto";
 }
 
-<h2>IndexProducto</h2>
+ 
+
+<div class="bg-primary text-white rounded p-3 mb-4 text-center shadow-sm">
+    <h2><i class="bi bi-box-seam"></i> Listado de Productos</h2>
+</div>
 
 @using (Html.BeginForm())
 {
-    <div>
-        <em> Articulo :</em> @Html.TextBox("nombre")
-        <button class="btn btn-info">Consultar</button>
+    <div class="row mb-4">
+        <div class="col-md-10 col-sm-8">
+            @Html.TextBox("nombre", null, new { @class = "form-control", placeholder = "Buscar producto..." })
+        </div>
+        <div class="col-md-2 col-sm-4 mt-sm-0 mt-2">
+            <button class="btn btn-outline-primary w-100">
+                <i class="bi bi-search"></i> Consultar
+            </button>
+        </div>
     </div>
 }
 
 @if (TempData["mensaje"] != null)
 {
-    <div class="alert alert-success">
-        <h4><strong>@TempData["mensaje"]</strong></h4>
+    <div class="alert alert-success text-center">
+        <strong>@TempData["mensaje"]</strong>
     </div>
 }
 
-<p>
-    @Html.ActionLink("Crear", "CreateProducto")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.cod_produc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nom_pro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.uni_med)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pre_pro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.stk_pro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mat_pro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cod_prov)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nom_prov)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cod_cate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nom_cate)
-        </th>
-        <th></th>
-    </tr>
+<div class="text-end mb-3">
+    @Html.ActionLink("Crear Producto", "CreateProducto", null, new { @class = "btn btn-success" })
+</div>
 
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover align-middle">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.cod_produc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nom_pro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.uni_med)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pre_pro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.stk_pro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.mat_pro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cod_prov)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nom_prov)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cod_cate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nom_cate)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "EditProducto", new {  id=item.cod_produc }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Ver", "Details", new {  id=item.cod_produc  }) |
-                @Html.ActionLink("Eliminar", "DeleteProducto", new {  id=item.cod_produc })
-            </td>
-        </tr>
-    }
+            <th>Codigo</th>
+            <th>Nombre </th>
+            <th>Uni Medida</th>
+            <th>Precio </th>
+            <th>Stock</th>
+            <th>Material</th>
+            <th>Proveedor</th>
+            <th>Categora</th>
 
-</table>
+            <th>Acciones</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cod_produc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nom_pro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.uni_med)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pre_pro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stk_pro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mat_pro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cod_prov)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cod_cate)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditProducto", new { id = item.cod_produc }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Ver", "DetailsStock", new { id = item.cod_produc }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Eliminar", "DeleteProducto", new { id = item.cod_produc }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

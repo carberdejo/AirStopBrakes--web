@@ -6,7 +6,7 @@
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-dark text-white text-center">
                     <h3><i class="bi bi-person-plus-fill"></i> Registro de Usuario</h3>
@@ -19,43 +19,43 @@
                 @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.nom_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.LabelFor(model => model.nom_usu,"Nombres Completos", htmlAttributes: new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.nom_usu, new { @class = "form-control", placeholder = "Nombre completo" })
                     @Html.ValidationMessageFor(model => model.nom_usu, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.ape_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.LabelFor(model => model.ape_usu, "Apellidos Completos", htmlAttributes: new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.ape_usu, new { @class = "form-control", placeholder = "Apellido completo" })
                     @Html.ValidationMessageFor(model => model.ape_usu, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.tel_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.LabelFor(model => model.tel_usu,"Telefono", htmlAttributes: new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.tel_usu, new { @class = "form-control", placeholder = "Teléfono o celular" })
                     @Html.ValidationMessageFor(model => model.tel_usu, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.cor_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.LabelFor(model => model.cor_usu,"Correo", htmlAttributes: new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.cor_usu, new { @class = "form-control", placeholder = "Correo electrónico" })
                     @Html.ValidationMessageFor(model => model.cor_usu, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.pass_usu, htmlAttributes: new { @class = "form-label" })
+                    @Html.LabelFor(model => model.pass_usu,"Contraseña", htmlAttributes: new { @class = "form-label" })
                     @Html.PasswordFor(model => model.pass_usu, new { @class = "form-control", placeholder = "Contraseña" })
                     @Html.ValidationMessageFor(model => model.pass_usu, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.fec_nac, htmlAttributes: new { @class = "form-label" })
+                    @Html.LabelFor(model => model.fec_nac,"Fecha de Nacimiento", htmlAttributes: new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.fec_nac, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
                     @Html.ValidationMessageFor(model => model.fec_nac, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.cod_dist, htmlAttributes: new { @class = "form-label" })
+                    @Html.LabelFor(model => model.cod_dist,"Distrito", htmlAttributes: new { @class = "form-label" })
                     @Html.DropDownList("cod_dist", (SelectList)ViewBag.listdist, "Seleccionar distrito", new { @class = "form-select" })
                     @Html.ValidationMessageFor(model => model.cod_dist, "", new { @class = "text-danger" })
                 </div>

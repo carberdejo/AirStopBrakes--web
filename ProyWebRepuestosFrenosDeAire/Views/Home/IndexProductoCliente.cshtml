@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Capa_Entidad.Producto>
+﻿
+@model IEnumerable<Capa_Entidad.Producto>
 
 @{
     ViewBag.Title = "Catálogo de Productos";
@@ -6,16 +7,6 @@
 <link href="~/Content/estilosProductos.css" rel="stylesheet" />
 <h2 class="text-center mb-4">Catálogo de Productos</h2>
 
-@*@if (User.Identity.IsAuthenticated)
-{
-    var identidad = (System.Web.Security.FormsIdentity)User.Identity;
-    var ticket = identidad.Ticket;
-    @:<p>NAME: @ticket.Name</p>
-    @:<p>USERDATA: @ticket.UserData</p>
-
-
-    
-}*@
 
 <h4>Bienvenido, @Session["nombre"] ,@Session["codigo"],@Session["rol"],@Session["email"],@Session["apellido"] </h4>
 <div class="row">
@@ -23,7 +14,7 @@
     {
 
         <div class="col-md-4 mb-4">
-            <a href="@Url.Action("Details", "Producto", new {  id=item.cod_produc })">
+            <a href="@Url.Action("AgregarProducto", "Venta", new {  id=item.cod_produc })">
                 <div class="card h-100 shadow-sm">
                     <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")"
                          alt="Imagen de @item.nom_pro"
@@ -38,7 +29,12 @@
                                 <small class="text-muted">Unidad: @item.uni_med</small>
                             }
                         </p>
-                        <a href="@Url.Action("AgregarProducto","Venta",new {id= item.cod_produc})" class="btn btn-primary">Agregar al carrito</a>
+                        @using (Html.BeginForm("AgregarProducto", "Venta", FormMethod.Post, new { @class = "d-inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("id", item.cod_produc)
+                            <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                        }
                     </div>
 
                 </div>

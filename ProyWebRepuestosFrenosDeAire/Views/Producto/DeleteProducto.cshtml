@@ -1,105 +1,66 @@
 ﻿@model Capa_Entidad.Producto
 
 @{
-    ViewBag.Title = "DeleteProducto";
+    ViewBag.Title = "Eliminar Producto";
 }
 
-<h2>DeleteProducto</h2>
-
-<h3>Seguro que quiere eliminar el producto @Model.nom_pro ?</h3>
-<div>
-    <h4>Producto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.cod_produc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cod_produc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nom_pro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nom_pro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.uni_med)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.uni_med)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pre_pro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pre_pro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.stk_pro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.stk_pro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.mat_pro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.mat_pro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cod_prov)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cod_prov)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nom_prov)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nom_prov)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cod_cate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cod_cate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nom_cate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nom_cate)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-warning" 
-                   onclick="return confirm('Seguro que quieres eliminar este producto')"   /> |
-            @Html.ActionLink("Regresar", "IndexProducto",null,new { @class = "btn btn-warning" })
+<div class="container mt-4">
+    <div class="card shadow rounded border-danger">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Eliminar Producto</h4>
         </div>
-    }
+
+        <div class="card-body">
+            <div class="alert alert-danger">
+                <strong>¿Estás seguro?</strong> Vas a eliminar el producto: <strong>@Model.nom_pro</strong>
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <th>Código</th>
+                        <td>@Model.cod_produc</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <td>@Model.nom_pro</td>
+                    </tr>
+                    <tr>
+                        <th>Unidad de Medida</th>
+                        <td>@Model.uni_med</td>
+                    </tr>
+                    <tr>
+                        <th>Precio</th>
+                        <td>S/ @Model.pre_pro</td>
+                    </tr>
+                    <tr>
+                        <th>Stock</th>
+                        <td>@Model.stk_pro</td>
+                    </tr>
+                    <tr>
+                        <th>Material</th>
+                        <td>@Model.mat_pro</td>
+                    </tr>
+                    <tr>
+                        <th>Proveedor</th>
+                        <td>@Model.nom_prov (@Model.cod_prov)</td>
+                    </tr>
+                    <tr>
+                        <th>Categoría</th>
+                        <td>@Model.nom_cate (@Model.cod_cate)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Eliminar definitivamente" class="btn btn-danger"
+                           onclick="return confirm('¿Estás completamente seguro de eliminar este producto?');" />
+                    @Html.ActionLink("Cancelar", "IndexProducto", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+    </div>
 </div>

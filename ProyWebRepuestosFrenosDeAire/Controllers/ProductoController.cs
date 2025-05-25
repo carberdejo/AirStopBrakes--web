@@ -6,32 +6,33 @@ using System.Web.Mvc;
 using Capa_Bussiness;
 using Capa_Entidad;
 using Newtonsoft.Json;
+using ProyWebRepuestosFrenosDeAire.Permisos;
 
 namespace ProyWebRepuestosFrenosDeAire.Controllers
 {
-    //[Authorize(Roles = "R02")]
+    [ValidarSession]
     public class ProductoController : Controller
     {
 
         ProductoBussiness prodBussiness = new ProductoBussiness();
-        ProveedorBussiness provB= new ProveedorBussiness();
+        ProveedorBussiness provB = new ProveedorBussiness();
 
         List<Carrito> listCarrito = new List<Carrito>();
         Producto buscarProduc(string id)
         {
-            var buscar = prodBussiness.listaProducto("").Find( p => p.cod_produc.Equals(id));
+            var buscar = prodBussiness.listaProducto("").Find(p => p.cod_produc.Equals(id));
             return buscar;
         }
 
 
 
         // GET: Producto
-        public ActionResult IndexProducto(string nombre="")
+        public ActionResult IndexProducto(string nombre = "")
         {
             return View(prodBussiness.listaProducto(nombre));
         }
 
-        
+
         public ActionResult IndexProductoCliente(string nombre = "")
         {
             //Si la variable de session no existe
@@ -43,9 +44,27 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         }
 
         // GET: Producto/Details/5
-        public ActionResult Details(string id)
+        public ActionResult DetailsStock(string id)
         {
             return View(buscarProduc(id));
+        }
+        // POST: Producto/Details/5
+        [HttpPost]
+        public ActionResult DetailsStock(string id, int newStock)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    TempData["mensaje"] = prodBussiness.UpdateStockProducto(id, newStock);
+                    return RedirectToAction("IndexProducto");
+                }
+            }
+            catch (Exception e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+            return View();
         }
 
         // GET: Producto/Create
@@ -130,5 +149,6 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             }
             return View(buscarProduc(id));
         }
+       
     }
 }

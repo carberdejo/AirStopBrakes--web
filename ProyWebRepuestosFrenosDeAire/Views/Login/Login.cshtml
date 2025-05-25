@@ -1,29 +1,45 @@
 ﻿@model Capa_Entidad.Usuario
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Iniciar Sesión";
 }
 
-<h2>Login</h2>
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-body p-4">
+            <h2 class="text-center mb-4 text-primary">Iniciar Sesión</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    @using (Html.BeginForm())
-    {
-        <div>
-            <label>Email</label>
-            @Html.TextBoxFor(m => m.cor_usu, new { @class = "form-control" })
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.cor_usu, "Correo electrónico", new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.cor_usu, new { @class = "form-control", placeholder = "Ingrese su correo" })
+                    @Html.ValidationMessageFor(m => m.cor_usu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.pass_usu, "Contraseña", new { @class = "form-label" })
+                    @Html.PasswordFor(m => m.pass_usu, new { @class = "form-control", placeholder = "Ingrese su contraseña" })
+                    @Html.ValidationMessageFor(m => m.pass_usu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </div>
+            }
+
+            <div class="text-center">
+                @Html.ActionLink("¿No tienes cuenta? Regístrate", "Registrar", null, new { @class = "btn btn-link" })
+            </div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Mensaje as string))
+            {
+                <div class="alert alert-warning mt-3 text-center">
+                    @ViewBag.Mensaje
+                </div>
+            }
         </div>
-
-        <div>
-            <label>Contraseña</label>
-            @Html.PasswordFor(m => m.pass_usu, new { @class = "form-control" })
-        </div>
-
-        <button type="submit">Iniciar Sesión</button>
-    }
-</div>
-<div>@Html.ActionLink("Registrarse", "Registrar", null, new { @class = "btn btn-success" })</div>
-<div>
-    <h3>@ViewBag.Mensaje</h3>
+    </div>
 </div>

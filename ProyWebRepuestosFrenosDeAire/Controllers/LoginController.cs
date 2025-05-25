@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Capa_Bussiness;
 using Capa_Entidad;
+using ProyWebRepuestosFrenosDeAire.Permisos;
 
 namespace ProyWebRepuestosFrenosDeAire.Controllers
 {
@@ -31,7 +32,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
                     
                     Console.WriteLine("Email: " + obj.cor_usu);
                     Console.WriteLine("Password: " + obj.pass_usu);
-                    return RedirectToAction("IndexProductoCliente", "Producto");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -64,7 +65,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
                 if (ModelState.IsValid)
                 {
                     TempData["mensaje"] = log.RegistrarUsuario(obj);
-                    return RedirectToAction("IndexProductoCliente","Producto");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             catch (Exception e)
@@ -90,7 +91,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
                 if (ModelState.IsValid)
                 {
                     TempData["mensaje"] = log.ActualizarUsuario(obj);
-                    return RedirectToAction("IndexProductoCliente", "Producto");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             catch (Exception e)
@@ -100,10 +101,13 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             ViewBag.listDist = new SelectList(dist.listaDistrito(), "cod_dist", "nom_dist");
             return View(obj);
         }
+
+        [ValidarSession]
         public ActionResult IndexUsuario()
         {
             return View(log.ListatUsuarios());
         }
+
         public ActionResult DetailsUsuario(string id)
         {
             var buscar = log.ListatUsuarios().Find(x => x.cod_usu == id);

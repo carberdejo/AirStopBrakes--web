@@ -46,6 +46,10 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         // GET: Venta/AgregarProducto
         public ActionResult AgregarProducto(string id = "")
         {
+            if(Session["codigo"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             var buscado = pro.listaProducto("").Find(x => x.cod_produc.Equals(id));
             return View(buscado);
         }
@@ -142,26 +146,6 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             return View(listCarrito);
         }
 
-        // GET: Venta/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Venta/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

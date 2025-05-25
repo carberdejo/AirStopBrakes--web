@@ -12,15 +12,23 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
 {
     public class HomeController : Controller
     {
+        List<Carrito> listCarrito = new List<Carrito>();
         public ActionResult Index()
         {
-            List<Carrito> listCarrito = new List<Carrito>();
             //Si la variable de session no existe
             if (Session["Carrito"] == null)
             {
                 Session["Carrito"] = JsonConvert.SerializeObject(listCarrito);
             }
             return View();
+        }
+
+        public ActionResult IndexProductoCliente( string nombre = "")
+        {
+            ProductoBussiness prodBussiness = new ProductoBussiness();
+
+            var lista = prodBussiness.listaProducto( nombre);
+            return View(lista);
         }
 
         public ActionResult IndexProductoCategoria(string id = "CA001" ,string nombre = "")

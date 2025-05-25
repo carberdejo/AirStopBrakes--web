@@ -6,13 +6,14 @@ using System.Web.Mvc;
 
 namespace ProyWebRepuestosFrenosDeAire.Permisos
 {
-    public class ValidarSession: ActionFilterAttribute
+    public class ValidarSessionAttribute: ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (HttpContext.Current.Session["rol"] == null)
+            string rol = HttpContext.Current.Session["rol"] as string;
+            if (rol == null || rol == "R02")
             {
-                filterContext.Result = new RedirectResult("~/Login/Index");
+                filterContext.Result = new RedirectResult("~/Home/Index");
             }
             else
             {

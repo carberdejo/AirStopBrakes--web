@@ -82,5 +82,18 @@ namespace Capa_Datos
             }
         }
 
+        public string UpdateStockProducto(string cod_produc, int cantidad)
+        {
+            try
+            {
+                object stock = Convert.ToInt32( DBHelper.RetornaScalar("SP_UPDATE_STOCK_PRODUCTO", cod_produc, cantidad));
+                return $"Stock actualizado a {stock} correctamente";
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error" + e.Message);
+            }
+        }
+
     }
 }

@@ -64,6 +64,17 @@ namespace Capa_Bussiness
             return dao.listaCategoria();
         }
 
+        public string UpdateStockProducto(string cod_produc, int cantidad)
+        {
+            try
+            {
+                return dao.UpdateStockProducto(cod_produc, cantidad);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error" + e.Message);
+            }
+        }
 
     }
 }
