@@ -11,10 +11,10 @@ namespace Capa_Datos
 {
     public class ProveedorDAO
     {
-        public List<Proveedor> listaProveedor()
+        public List<Proveedor> listaProveedor(string nombre)
         {
             var lista = new List<Proveedor>();
-            DataTable dt = DBHelper.RetornaDataTable("SP_LISTA_PROVEEDOR");
+            DataTable dt = DBHelper.RetornaDataTable("SP_LISTA_PROVEEDORES", nombre);
             string cad_json = JsonConvert.SerializeObject(dt);
             lista = JsonConvert.DeserializeObject<List<Proveedor>>(cad_json);
             return lista;

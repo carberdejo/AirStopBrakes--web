@@ -12,9 +12,9 @@ namespace Capa_Bussiness
     public class ProveedorBussiness
     {
         ProveedorDAO dao = new ProveedorDAO();
-        public List<Proveedor> listaProveedor()
+        public List<Proveedor> listaProveedor(string nombre)
         {
-            return dao.listaProveedor();
+            return dao.listaProveedor(nombre);
         }
         public string GrabarProveedor(Proveedor obj)
         {

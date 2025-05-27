@@ -1,58 +1,45 @@
 ﻿@model Capa_Entidad.Proveedor
 
 @{
-    ViewBag.Title = "DetailsProveedor";
+    ViewBag.Title = "Detalle del Proveedor";
 }
 
-<h2>DetailsProveedor</h2>
+<div class="container mt-4">
+    <div class="card shadow rounded">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Detalle de Proveedor</h4>
+        </div>
 
-<div>
-    <h4>Proveedor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.cod_prov)
-        </dt>
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <th>Código</th>
+                        <td>@Model.cod_prov</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <td>@Model.nom_prov</td>
+                    </tr>
+                    <tr>
+                        <th>Pais de origen</th>
+                        <td>@Model.pais_origen</td>
+                    </tr>
+                    <tr>
+                        <th>Telefono</th>
+                        <td>S/ @Model.telefono</td>
+                    </tr>
+                    <tr>
+                        <th>Correo</th>
+                        <td>@Model.email unidades</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.cod_prov)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nom_prov)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nom_prov)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pais_origen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pais_origen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.telefono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd> 
-
-    </dl>
+            <div class="mt-4 d-flex justify-content-between">
+                @Html.ActionLink("Editar", "EditProveedor", new { id = Model.cod_prov }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Regresar", "IndexProveedor", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "EditProveedor", new { id = Model.cod_prov }) |
-    @Html.ActionLink("Back to List", "IndexProveedor")
-</p>

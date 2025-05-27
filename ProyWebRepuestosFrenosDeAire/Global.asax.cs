@@ -20,26 +20,13 @@ namespace ProyWebRepuestosFrenosDeAire
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        //protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
-        //{
-        //    HttpCookie authcookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
-
-        //    if (authcookie != null)
-        //    {
-        //        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authcookie.Value);
-
-        //        if (ticket != null && !ticket.Expired)
-        //        {
-        //            //string[] datos = ticket.UserData.Split('|');
-
-        //            FormsIdentity identity = new FormsIdentity(ticket);
-        //            string[] roles = new string[] { ticket.UserData };
-        //            GenericPrincipal principal = new GenericPrincipal(identity,roles);
-
-        //            HttpContext.Current.User = principal;
-        //        }
-        //    }
-        //}
+        protected void Application_BeginRequest()
+        {
+            var cultureInfo = new System.Globalization.CultureInfo("es-PE");
+            cultureInfo.NumberFormat.CurrencySymbol = "";
+            System.Threading.Thread.CurrentThread.CurrentCulture = cultureInfo;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = cultureInfo;
+        }
 
 
     }

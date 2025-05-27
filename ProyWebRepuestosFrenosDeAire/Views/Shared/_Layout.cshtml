@@ -94,7 +94,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Acerca de", "About", "Home", null, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Acerca de", "AcercaDe", "Home", null, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Productos", "IndexProductoCliente", "Home", null, new { @class = "nav-link" })</li>
                 <li class="nav-item dropdown position-relative">
                     <a class="nav-link dropdown-toggle" href="#" id="productosDropdown">Categorias</a>
@@ -124,7 +124,7 @@
 
             </ul>
             <!--MODAL SEARCH-->
-            @using (Html.BeginForm("IndexProductoCliente", "Producto", FormMethod.Post, new { @class = "d-flex ms-3", role = "search" }))
+            @using (Html.BeginForm("IndexProductoCliente", "Home", FormMethod.Post, new { @class = "d-flex ms-3", role = "search" }))
             {
                 @Html.TextBox("nombre", null, new { @class = "form-control me-2", type = "search", placeholder = "Buscar producto...", aria_label = "Buscar" })
                 <button class="btn btn-outline-light" type="submit">
@@ -171,11 +171,16 @@
                         }
                         else
                         {
+                            string codigo = Session["codigo"].ToString();
                             <li><h6 class="dropdown-header">Hola, @Session["nombre"]</h6></li>
-                            <li><a class="dropdown-item" href="@Url.Action("DetailsUsuario", "Login",new { id = Session["codigo"] })">Perfil</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("DetailsUsuario", "Login",new { id = codigo,rol = Session["rol"] })">Perfil</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="@Url.Action("ActualizarUsuario", "Login",new { id = Session["codigo"] })">Editar</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            if (Session["rol"].ToString() == "R02")
+                            {
+                                <li><a class="dropdown-item" href="@Url.Action("ActualizarUsuario", "Login",new { id = codigo })">Editar</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                            }
+
                             <li><a class="dropdown-item" href="@Url.Action("Logout", "Login")">Cerrar Sesión</a></li>
                         }
 

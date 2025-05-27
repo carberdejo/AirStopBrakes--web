@@ -23,7 +23,7 @@
         <section class="col-md-4" aria-labelledby="librariesTitle">
             <h2 id="librariesTitle">Nuestra Historia</h2>
             <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            <p><a class="btn btn-outline-dark" href=@Url.Action("AcercaDe")>Learn more &raquo;</a></p>
         </section>
         <section class="col-md-4" aria-labelledby="hostingTitle">
             <h2 id="hostingTitle">Web Hosting</h2>
@@ -31,25 +31,88 @@
             <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
         </section>
     </div>
-    <div class="service-grid">
-        <a href="@Url.Action("IndexProductoCliente", "Home")">
-            <div class="service-item">
-                <img src="~/Content/Productos/banner_2.jpg" alt="Línea Automotriz">
 
-                <div class="service-overlay">Línea Automotriz</div>
-            </div>
-        </a>
-        <div class="service-item">
-            <img src="~/Content/Productos/banner_1.jpg" alt="Ingeniería de Compuestos">
-            <div class="service-overlay">Ingeniería de Compuestos</div>
+    <div class="service-grid">
+        @{
+            var pro = new List<Capa_Entidad.Categoria>();
+            var obj = new Capa_Bussiness.ProductoBussiness();
+            pro = obj.listaCategoria();
+            foreach (var item in pro)
+            {
+                <a href="@Url.Action("IndexProductoCategoria",new {id=item.cod_cate})">
+                    <div class="service-item">
+                        <img src=@Url.Content("~/Content/Productos/"+@item.cod_cate+".jpg") alt=@item.nom_cate>
+
+                        <div class="service-overlay">@item.nom_cate</div>
+                    </div>
+                </a>
+            }
+        }
+    </div>
+    <div class="container-fluid py-5">
+        <h2 class="mb-4 text-center text-primary">Nuestros Repuestos</h2>
+
+        <div id="cardContainer" class="row g-4 px-3">
+            @{ 
+                var repuestos = new Capa_Bussiness.ProductoBussiness();
+                var listP = repuestos.listaProducto("");
+                foreach(var item in listP)
+            {
+                        <div class="col-6 col-md-3 card-item rounded-10">
+                            <div class="card h-100 shadow" style="min-height: 380px;">
+                                <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")" alt="@item.nom_pro" style="height:300px; object-fit:cover" >
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">@item.nom_pro</h5>
+                                    <p class="card-text">@item.uni_med </p>
+                                    <p class="card-text fw-bold text-success mt-auto">S/ @item.pre_pro</p>
+                                </div>
+                            </div>
+                        </div>
+            }
+            }
         </div>
-        <div class="service-item">
-            <img src="~/Content/Productos/banner_2.jpg" alt="Diseño y Desarrollo">
-            <div class="service-overlay">Diseño y Desarrollo</div>
-        </div>
-        <div class="service-item">
-            <img src="~/Content/Productos/banner_2.jpg" alt="Línea Industrial">
-            <div class="service-overlay">Línea Industrial</div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-outline-primary me-2" onclick="prevCards()">
+                <i class="bi bi-arrow-left-circle-fill me-1"></i> Anterior
+            </button>
+            <button class="btn btn-primary" onclick="nextCards()">
+                Siguiente <i class="bi bi-arrow-right-circle-fill ms-1"></i>
+            </button>
         </div>
     </div>
+
+
 </main>
+@section Scripts {
+    <script>
+        let startIndex = 0;
+        const cardsPerPage = 4;
+        const allCards = document.querySelectorAll('.card-item');
+
+        function showCards() {
+            allCards.forEach((card, index) => {
+                card.style.display = (index >= startIndex && index < startIndex + cardsPerPage) ? 'block' : 'none';
+            });
+        }
+
+        function nextCards() {
+            startIndex += cardsPerPage;
+            if (startIndex >= allCards.length) {
+                startIndex = 0; // volver al inicio
+            }
+            showCards();
+        }
+        function prevCards() {
+            startIndex -= cardsPerPage;
+            if (startIndex < 0) {
+                // ir al último grupo completo
+                startIndex = Math.floor((allCards.length - 1) / cardsPerPage) * cardsPerPage;
+            }
+            showCards();
+        }
+
+        // Mostrar los primeros 3 al cargar
+        document.addEventListener("DOMContentLoaded", showCards);
+    </script>
+}

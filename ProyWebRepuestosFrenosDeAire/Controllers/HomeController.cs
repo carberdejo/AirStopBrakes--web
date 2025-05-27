@@ -13,18 +13,23 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
     public class HomeController : Controller
     {
         List<Carrito> listCarrito = new List<Carrito>();
+        void CargarCarrito()
+        {
+            if (Session["Carrito"] != null)
+            {
+                listCarrito = JsonConvert.DeserializeObject<List<Carrito>>(Session["Carrito"].ToString());
+            }
+        }
         public ActionResult Index()
         {
             //Si la variable de session no existe
-            if (Session["Carrito"] == null)
-            {
-                Session["Carrito"] = JsonConvert.SerializeObject(listCarrito);
-            }
+            CargarCarrito();
             return View();
         }
 
         public ActionResult IndexProductoCliente( string nombre = "")
         {
+            CargarCarrito();
             ProductoBussiness prodBussiness = new ProductoBussiness();
 
             var lista = prodBussiness.listaProducto( nombre);
@@ -33,12 +38,17 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
 
         public ActionResult IndexProductoCategoria(string id = "CA001" ,string nombre = "")
         {
+            CargarCarrito();
             ProductoBussiness prodBussiness = new ProductoBussiness();
             
             var lista = prodBussiness.listaProductoCate(id, nombre);
             return View(lista);
         }
-
+        public ActionResult AcercaDe()
+        {
+            CargarCarrito();
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -16,14 +16,14 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
 
         Proveedor buscarProv(string id)
         {
-            var buscar = prov.listaProveedor().Find(p => p.cod_prov.Equals(id));
+            var buscar = prov.listaProveedor("").Find(p => p.cod_prov.Equals(id));
             return buscar;
         }
 
         // GET: Proveedor
-        public ActionResult IndexProveedor()
+        public ActionResult IndexProveedor(string nombre="")
         {
-            return View(prov.listaProveedor());
+            return View(prov.listaProveedor(nombre));
         }
 
         // GET: Proveedor/DetailsProveedor/5

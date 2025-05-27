@@ -4,78 +4,71 @@
     ViewBag.Title = "IndexUsuario";
 }
 
-<h2>IndexUsuario</h2>
+<div class="bg-primary text-white rounded p-3 mb-4 text-center shadow-sm">
+    <h2><i class="bi bi-box-seam"></i> Listado de Clientes</h2>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.cod_usu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nom_usu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ape_usu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tel_usu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cor_usu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pass_usu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fec_nac)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cod_dist)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cod_rol)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.cod_usu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom_usu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ape_usu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tel_usu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cor_usu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pass_usu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fec_nac)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cod_dist)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cod_rol)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+@using (Html.BeginForm())
+{
+    <div class="row mb-4">
+        <div class="col-md-10 col-sm-8">
+            @Html.TextBox("apellido", null, new { @class = "form-control", placeholder = "Buscar apellido..." })
+        </div>
+        <div class="col-md-2 col-sm-4 mt-sm-0 mt-2">
+            <button class="btn btn-outline-primary w-100">
+                <i class="bi bi-search"></i> Consultar
+            </button>
+        </div>
+    </div>
 }
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@TempData["mensaje"]</strong>
+    </div>
+}
+<table class="table table-bordered table-striped table-hover align-middle">
+    <tr>
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Telefono</th>
+        <th>Correo</th>
+        <th>Fec. Nac.</th>
+        <th>Distrito</th>
+        <th> Acciones </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_usu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_usu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ape_usu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tel_usu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cor_usu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fec_nac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_dist)
+            </td>
+            <td>
+                @Html.ActionLink("Actualizar", "ActualizarUsuario", new {  id=item.cod_usu }) |
+                @Html.ActionLink("Details", "DetailsUsuario", new { id=item.cod_usu, rol = "R02" })
+            </td>
+        </tr>
+    }
 
 </table>

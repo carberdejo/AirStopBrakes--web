@@ -12,22 +12,13 @@ namespace Capa_Datos
 {
     public class LoginDAO
     {
-        string RolUsuario = "R01";
+        string RolUsuario = "R02";
         public bool ValidarUsuario(string email, string password) {
 
             DataTable dt = DBHelper.RetornaDataTable("SP_VALIDAR_USUARIO", email, password);
             if(dt.Rows.Count == 1)
             {
                 DataRow dr = dt.Rows[0];
-                //string rol = dr["cod_rol"].ToString();
-
-                //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-                //        1, rol, DateTime.Now, DateTime.Now.AddMinutes(30), false, email
-                //    );
-                //string encriptado = FormsAuthentication.Encrypt(ticket);
-
-                //HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encriptado);
-                //HttpContext.Current.Response.Cookies.Add(cookie);
 
                 HttpContext.Current.Session["codigo"] = dr["cod_usu"];
                 HttpContext.Current.Session["correo"] = dr["cor_usu"];
@@ -66,13 +57,23 @@ namespace Capa_Datos
             }
         }
 
-        public List<Usuario> ListatUsuarios()
+        public List<Usuario> ListatUsuarios(string apellido)
         {
             List<Usuario> lista = new List<Usuario>();
-            DataTable dt = DBHelper.RetornaDataTable("SP_LISTA_USUARIO");
+            DataTable dt = DBHelper.RetornaDataTable("SP_LISTA_USUARIO", apellido);
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(dt);
             lista = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Usuario>>(json);
         
+            return lista;
+        }
+
+        public List<Usuario> ListatAdmin(string apellido)
+        {
+            List<Usuario> lista = new List<Usuario>();
+            DataTable dt = DBHelper.RetornaDataTable("SP_LISTA_ADMIN", apellido);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(dt);
+            lista = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Usuario>>(json);
+
             return lista;
         }
 

@@ -4,54 +4,68 @@
     ViewBag.Title = "IndexProveedor";
 }
 
-<h2>IndexProveedor</h2>
+<div class="bg-secondary text-white rounded p-3 mb-4 text-center shadow-sm">
+    <h2><i class="bi bi-box-seam"></i> Listado de Productos</h2>
+</div>
 
-<p>
-    @Html.ActionLink("Crear", "CreateProveedor")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.cod_prov)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nom_prov)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pais_origen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.cod_prov)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom_prov)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pais_origen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditProveedor", new { id=item.cod_prov }) |
-            @Html.ActionLink("Details", "DetailsProveedor", new {  id=item.cod_prov }) |
-            @Html.ActionLink("Delete", "DeleteProveedor", new {  id=item.cod_prov })
-        </td>
-    </tr>
+@using (Html.BeginForm())
+{
+    <div class="row mb-4">
+        <div class="col-md-10 col-sm-8">
+            @Html.TextBox("nombre", null, new { @class = "form-control", placeholder = "Buscar proveedor..." })
+        </div>
+        <div class="col-md-2 col-sm-4 mt-sm-0 mt-2">
+            <button class="btn btn-outline-primary w-100">
+                <i class="bi bi-search"></i> Consultar
+            </button>
+        </div>
+    </div>
 }
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@TempData["mensaje"]</strong>
+    </div>
+}
+
+<div class="text-end mb-3">
+    @Html.ActionLink("Agregar Proveedor", "CreateProveedor", null, new { @class = "btn btn-success" })
+</div>
+<table class="table table-bordered table-striped table-hover align-middle">
+    <tr>
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Pais</th>
+        <th>Correo</th>
+        <th>Telefono</th>
+        <th> Acciones </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_prov)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_prov)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pais_origen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProveedor", new { id = item.cod_prov }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "DetailsProveedor", new { id = item.cod_prov }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Delete", "DeleteProveedor", new { id = item.cod_prov }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>

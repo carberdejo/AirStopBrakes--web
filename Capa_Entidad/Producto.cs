@@ -16,12 +16,16 @@ namespace Capa_Entidad
         public string nom_pro { get; set; }
         public string uni_med { get; set; }
         [Required]
-        [Range(0, 5000)]
+        
+        [DataType(DataType.Currency)]
         public decimal pre_pro { get; set; }
         [Required]
         [Range(0, 5000)]
         public int stk_pro { get; set; }
         public string mat_pro { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime fec_ingreso { get; set; }
         public string cod_prov { get; set; }
         public string nom_prov { get; set; }
         public string cod_cate { get; set; }

@@ -45,9 +45,13 @@ namespace Capa_Bussiness
             }
         }
 
-        public List<Usuario> ListatUsuarios()
+        public List<Usuario> ListatUsuarios(string apellido)
         {
-            return dao.ListatUsuarios();
+            return dao.ListatUsuarios(apellido);
+        }
+        public List<Usuario> ListatAdmin(string apellido)
+        {
+            return dao.ListatAdmin(apellido);
         }
     }
 }

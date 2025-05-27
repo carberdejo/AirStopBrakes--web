@@ -79,7 +79,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         //GET
         public ActionResult ActualizarUsuario(string id)
         {
-            var buscar = log.ListatUsuarios().Find(x => x.cod_usu == id);
+            var buscar = log.ListatUsuarios("").Find(x => x.cod_usu == id);
             ViewBag.listDist = new SelectList(dist.listaDistrito(), "cod_dist", "nom_dist");
             return View(buscar);
         }
@@ -103,14 +103,23 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         }
 
         [ValidarSession]
-        public ActionResult IndexUsuario()
+        public ActionResult IndexUsuario(string apellido = "")
         {
-            return View(log.ListatUsuarios());
+            return View(log.ListatUsuarios(apellido));
         }
 
-        public ActionResult DetailsUsuario(string id)
+        public ActionResult DetailsUsuario(string id,string rol)
         {
-            var buscar = log.ListatUsuarios().Find(x => x.cod_usu == id);
+            
+            var buscar = new Usuario();
+            if (rol == "R01")
+            {
+                buscar = log.ListatAdmin("").Find(x => x.cod_usu == id);
+            }
+            else
+            {
+                buscar = log.ListatUsuarios("").Find(x => x.cod_usu == id);
+            }
             return View(buscar);
         }
     }
