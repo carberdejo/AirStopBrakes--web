@@ -2,73 +2,83 @@
     ViewBag.Title = "Home Page";
 }
 <link href="~/Content/Styles/Home.css" rel="stylesheet" />
-<main>
+<main class="container my-5">
+    <div class="mb-4">
+        <img src="~/Content/Productos/banner_2.jpg" alt="banner" class="img-fluid rounded w-100" style="max-height: 400px; object-fit: cover;" />
+    </div>
 
-    <img src="~/Content/Productos/banner_2.jpg" alt="banner_1" class="img-fluid rounded" />
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">Airstop Brakes</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-
+    <section class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Airstop Brakes</h1>
+        <p class="lead text-secondary">Importación y venta de repuestos de alta calidad. Tecnología y durabilidad para tu vehículo.</p>
     </section>
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Importacion de calidad</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+    <div class="row text-center mb-5">
+        <section class="col-md-4">
+            <div class="p-3 border rounded shadow-sm h-100">
+                <h3 class="text-dark">Importación de calidad</h3>
+                <p class="text-muted">Productos importados de las mejores marcas con altos estándares de calidad.</p>
+                <a class="btn btn-outline-dark mt-auto" href="#">Saber más &raquo;</a>
+            </div>
         </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Nuestra Historia</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href=@Url.Action("AcercaDe")>Learn more &raquo;</a></p>
+        <section class="col-md-4">
+            <div class="p-3 border rounded shadow-sm h-100">
+                <h3 class="text-dark">Nuestra Historia</h3>
+                <p class="text-muted">Más de 10 años ofreciendo confianza, garantía y seguridad a nuestros clientes.</p>
+                <a class="btn btn-outline-dark mt-auto" href=@Url.Action("AcercaDe")>Saber más &raquo;</a>
+            </div>
         </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <section class="col-md-4">
+            <div class="p-3 border rounded shadow-sm h-100">
+                <h3 class="text-dark">Contáctanos</h3>
+                <p class="text-muted">Escríbenos para recibir asesoría gratuita sobre nuestros repuestos y servicios.</p>
+                <a class="btn btn-outline-dark mt-auto" href="#">Saber más &raquo;</a>
+            </div>
         </section>
     </div>
 
-    <div class="service-grid">
+    <div class="row mb-5">
+        <h2 class="text-center text-primary mb-4">Categorías</h2>
         @{
             var pro = new List<Capa_Entidad.Categoria>();
             var obj = new Capa_Bussiness.ProductoBussiness();
             pro = obj.listaCategoria();
             foreach (var item in pro)
             {
-                <a href="@Url.Action("IndexProductoCategoria",new {id=item.cod_cate})">
-                    <div class="service-item">
-                        <img src=@Url.Content("~/Content/Productos/"+@item.cod_cate+".jpg") alt=@item.nom_cate>
-
-                        <div class="service-overlay">@item.nom_cate</div>
-                    </div>
-                </a>
+                <div class="col-6 col-md-3 mb-4">
+                    <a href="@Url.Action("IndexProductoCategoria", new { id = item.cod_cate })" class="text-decoration-none">
+                        <div class="position-relative rounded shadow-sm overflow-hidden">
+                            <img src=@Url.Content("~/Content/Productos/" + item.cod_cate + ".jpg") class="img-fluid" alt=@item.nom_cate style="height: 180px; object-fit: cover;">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-50 text-white fw-bold fs-5">
+                                @item.nom_cate
+                            </div>
+                        </div>
+                    </a>
+                </div>
             }
         }
     </div>
-    <div class="container-fluid py-5">
-        <h2 class="mb-4 text-center text-primary">Nuestros Repuestos</h2>
 
+    <div class="container-fluid py-5 bg-light">
+        <h2 class="mb-4 text-center text-primary">Nuestros Repuestos</h2>
         <div id="cardContainer" class="row g-4 px-3">
-            @{ 
+            @{
                 var repuestos = new Capa_Bussiness.ProductoBussiness();
                 var listP = repuestos.listaProducto("");
-                foreach(var item in listP)
-            {
-                        <div class="col-6 col-md-3 card-item rounded-10">
-                            <div class="card h-100 shadow" style="min-height: 380px;">
-                                <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")" alt="@item.nom_pro" style="height:300px; object-fit:cover" >
+                foreach (var item in listP)
+                {
+                    <div class="col-6 col-md-3 card-item">
+                        <a href="@Url.Action("AgregarProducto", "Venta", new { id = item.cod_produc })" class="text-decoration-none">
+                            <div class="card h-100 shadow-sm">
+                                <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")" alt="@item.nom_pro" class="card-img-top" style="height: 250px; object-fit: cover;">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">@item.nom_pro</h5>
-                                    <p class="card-text">@item.uni_med </p>
+                                    <p class="card-text">@item.uni_med</p>
                                     <p class="card-text fw-bold text-success mt-auto">S/ @item.pre_pro</p>
                                 </div>
                             </div>
-                        </div>
-            }
+                        </a>
+                    </div>
+                }
             }
         </div>
 
@@ -81,9 +91,8 @@
             </button>
         </div>
     </div>
-
-
 </main>
+
 @section Scripts {
     <script>
         let startIndex = 0;
@@ -99,20 +108,19 @@
         function nextCards() {
             startIndex += cardsPerPage;
             if (startIndex >= allCards.length) {
-                startIndex = 0; // volver al inicio
+                startIndex = 0;
             }
             showCards();
         }
+
         function prevCards() {
             startIndex -= cardsPerPage;
             if (startIndex < 0) {
-                // ir al último grupo completo
                 startIndex = Math.floor((allCards.length - 1) / cardsPerPage) * cardsPerPage;
             }
             showCards();
         }
 
-        // Mostrar los primeros 3 al cargar
         document.addEventListener("DOMContentLoaded", showCards);
     </script>
 }

@@ -38,8 +38,10 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-4 gap-3">
+                        @if (Session["rol"].ToString() == "R02") { 
                         @Html.ActionLink("✏️ Editar Perfil", "Edit", new { id = Model.cod_usu }, new { @class = "btn btn-outline-primary px-4" })
-                        @Html.ActionLink("🔙 Volver", "Index", null, new { @class = "btn btn-secondary px-4" })
+                        }
+                        <button class="btn btn-secondary me-2" onclick="window.history.back();">Volver</button>
                     </div>
                 </div>
             </div>

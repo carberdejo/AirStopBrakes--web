@@ -27,21 +27,22 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
 
 
         // GET: Producto
-        public ActionResult IndexProducto(string nombre = "")
+        public ActionResult IndexProducto( int nro_pag=0,string nombre = "" )
         {
-            return View(prodBussiness.listaProducto(nombre));
+            var lista = prodBussiness.listaProducto(nombre);
+            int num = lista.Count;
+            //
+            ViewBag.contador = num;
+            ViewBag.nombre = nombre;
+            int cant_filas = 8;
+            //
+            int cant_pag= (num % cant_filas == 0) ? (num / cant_filas) : (num / cant_filas + 1);
+            //
+            ViewBag.CANT_PAGINAS = cant_pag;
+
+            return View(lista.Skip(nro_pag*cant_filas).Take(cant_filas));
         }
 
-
-        public ActionResult IndexProductoCliente(string nombre = "")
-        {
-            //Si la variable de session no existe
-            if (Session["Carrito"] == null)
-            {
-                Session["Carrito"] = JsonConvert.SerializeObject(listCarrito);
-            }
-            return View(prodBussiness.listaProducto(nombre));
-        }
 
         // GET: Producto/Details/5
         public ActionResult DetailsStock(string id)

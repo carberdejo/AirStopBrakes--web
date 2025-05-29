@@ -46,10 +46,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         // GET: Venta/AgregarProducto
         public ActionResult AgregarProducto(string id = "")
         {
-            if(Session["codigo"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
+            
             var buscado = pro.listaProducto("").Find(x => x.cod_produc.Equals(id));
             return View(buscado);
         }
@@ -58,6 +55,10 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         [HttpPost]
         public ActionResult AgregarProducto(string id = "", int cantidad = 1)
         {
+            if (Session["codigo"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             var buscado = pro.listaProducto("").Find(x => x.cod_produc.Equals(id));
             getCarrito();
             
@@ -72,13 +73,13 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
                     cantidad = cantidad
                 };
                 listCarrito.Add(car);
-                ViewBag.mensaje = $"Se agrego el producto : {buscado.nom_pro}" + $"con la cantidad {cantidad}";
+                ViewBag.mensaje = $"Se agrego el producto : {buscado.nom_pro}" + $" con la cantidad {cantidad}";
             }
             else
             {
                 int ncant = encontrado.cantidad;
                 encontrado.cantidad += cantidad;
-                ViewBag.mensaje = $"Se aumento el producto : {buscado.nom_pro}" + $"con la cantidad {ncant} a {encontrado.cantidad}";
+                ViewBag.mensaje = $"Se aumento el producto : {buscado.nom_pro}" + $" con la cantidad {ncant} a {encontrado.cantidad}";
             }
 
             setCarrito();

@@ -14,7 +14,7 @@
     {
 
         <div class="col-md-4 mb-4">
-            <a href="@Url.Action("AgregarProducto", "Venta", new {  id=item.cod_produc })">
+            <a href="@Url.Action("AgregarProducto", "Venta", new {  id=item.cod_produc })" style="text-decoration:none">
                 <div class="card h-100 shadow-sm">
                     <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")"
                          alt="Imagen de @item.nom_pro"

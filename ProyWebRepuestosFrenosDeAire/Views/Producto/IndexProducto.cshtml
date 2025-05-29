@@ -45,7 +45,7 @@
             <th>Stock</th>
             <th>Material</th>
             <th>Ingreso</th>
-            <th>Proveedor</th>
+            <th>Prov</th>
             <th>Cate.</th>
 
             <th>Acciones</th>
@@ -91,3 +91,14 @@
 
     </table>
     </div>
+<div class="alert alert-light text-center">
+    @for (int i = 0; i < ViewBag.CANT_PAGINAS; i++)
+    {
+        @Html.ActionLink(
+           (i + 1).ToString(),
+           "IndexProducto",
+           new { nro_pag = i, nombre = ViewBag.nombre },
+           new { @class = "btn btn-primary ms-2" }
+    )
+    }
+</div>

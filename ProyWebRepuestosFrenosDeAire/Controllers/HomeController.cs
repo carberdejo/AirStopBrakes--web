@@ -15,9 +15,9 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
         List<Carrito> listCarrito = new List<Carrito>();
         void CargarCarrito()
         {
-            if (Session["Carrito"] != null)
+            if (Session["Carrito"] == null)
             {
-                listCarrito = JsonConvert.DeserializeObject<List<Carrito>>(Session["Carrito"].ToString());
+                Session["Carrito"] = JsonConvert.SerializeObject(listCarrito);
             }
         }
         public ActionResult Index()
@@ -36,12 +36,12 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             return View(lista);
         }
 
-        public ActionResult IndexProductoCategoria(string id = "CA001" ,string nombre = "")
+        public ActionResult IndexProductoCategoria(string id_cate = "CA001" ,string nombre = "")
         {
             CargarCarrito();
             ProductoBussiness prodBussiness = new ProductoBussiness();
             
-            var lista = prodBussiness.listaProductoCate(id, nombre);
+            var lista = prodBussiness.listaProductoCate(id_cate, nombre);
             return View(lista);
         }
         public ActionResult AcercaDe()

@@ -149,7 +149,7 @@ INSERT INTO PRODUCTOS (cod_produc, nom_pro, uni_med, pre_pro, stk_pro, mat_pro, 
 ('P0015', 'Válvula de Freno de Mano', 'Unidad', 190.00, 12, 'Metal', '2025-02-16', 'PV003', 'CA002'),
 ('P0016', 'Juego de Pastillas TRP', 'Jgo', 135.00, 35, 'Cerámica', '2025-02-18', 'PV007', 'CA004'),
 ('P0017', 'Heve de Freno con Gancho', 'Unidad', 30.00, 50, 'Acero', '2025-02-24', 'PV006', 'CA004'),
-('P0028', 'Disco de Freno Ventilado HD', 'Unidad', 250.00, 20, 'Acero', '2025-02-25', 'PV006', 'CA004'),
+('P0018', 'Disco de Freno Ventilado HD', 'Unidad', 250.00, 20, 'Acero', '2025-02-25', 'PV006', 'CA004'),
 ('P0019', 'Aceite Hidráulico ATF', 'Litros', 45.00, 90, 'Aceite', '2025-03-01', 'PV008', 'CA001'),
 ('P0020', 'Filtro Cabina Antialérgico', 'Unidad', 35.00, 55, 'Fibra', '2025-03-03', 'PV008', 'CA003'),
 ('P0021', 'Heve de Retorno para Válvula', 'Unidad', 18.50, 75, 'Metal', '2025-03-04', 'PV004', 'CA004'),
@@ -307,6 +307,7 @@ GO
 
 
 select * from PRODUCTOS
+go
 ------------------------------------------------------
 --VENTA
 
