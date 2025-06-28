@@ -31,7 +31,7 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             getCarrito();
             if(listCarrito.Count == 0)
             {
-                return RedirectToAction("IndexProductoCliente","Producto");
+                return RedirectToAction("IndexProductoCliente","Home");
             }
             ViewBag.total = listCarrito.Sum(p => p.importe);
             return View(listCarrito);
@@ -93,13 +93,13 @@ namespace ProyWebRepuestosFrenosDeAire.Controllers
             Carrito eliminar = listCarrito.Find(c => c.cod_produc.Equals(id));
             listCarrito.Remove(eliminar);
 
-            TempData["Mensaje"] = $"Se eliminó al Articulo {eliminar.nom_pro}";
+            TempData["MensajeCarrito"] = $"Se eliminó al Articulo {eliminar.nom_pro}";
 
-            if (eliminar.cantidad > 0)
+            if (eliminar.cantidad > 1)
             {
                 eliminar.cantidad--;
                 //
-                TempData["Mensaje"] =
+                TempData["MensajeCarrito"] =
                     $"Se actualizó la cantidad del Articulo: {eliminar.nom_pro}";
             }
             setCarrito() ;

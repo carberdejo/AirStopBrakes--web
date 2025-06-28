@@ -9,13 +9,19 @@
 
 
 @*<h4>Bienvenido, @Session["nombre"] ,@Session["codigo"],@Session["rol"],@Session["email"],@Session["apellido"] </h4>*@
+@if (TempData["MensajeCarrito"] != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@TempData["MensajeCarrito"]</strong>
+    </div>
+}
 <div class="row">
     @foreach (var item in Model)
     {
 
         <div class="col-md-4 mb-4">
-            <a href="@Url.Action("AgregarProducto", "Venta", new {  id=item.cod_produc })" style="text-decoration:none">
-                <div class="card h-100 shadow-sm">
+            <div class="card h-100 shadow-sm">
+                <a href="@Url.Action("AgregarProducto", "Venta", new { id = item.cod_produc })" style="text-decoration:none">
                     <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")"
                          alt="Imagen de @item.nom_pro"
                          class="card-img-top"
@@ -29,16 +35,18 @@
                                 <small class="text-muted">Unidad: @item.uni_med</small>
                             }
                         </p>
-                        @using (Html.BeginForm("AgregarProducto", "Venta", FormMethod.Post, new { @class = "d-inline" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.Hidden("id", item.cod_produc)
-                            <button type="submit" class="btn btn-primary">Agregar al carrito</button>
-                        }
                     </div>
-
+                </a>
+                <div class="card-body">
+                    @using (Html.BeginForm("AgregarProducto", "Venta", FormMethod.Post, new { @class = "d-inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", item.cod_produc)
+                        <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                    }
                 </div>
-            </a>
+            </div>
         </div>
+
     }
 </div>

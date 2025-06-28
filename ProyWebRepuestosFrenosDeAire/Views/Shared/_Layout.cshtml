@@ -119,6 +119,14 @@
                             </ul>
 
                         </li>
+                        <li class="nav-item dropdown position-relative">
+                            <a class="nav-link dropdown-toggle" href="#" id="productosDropdown">Reportes</a>
+                            <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                                <li>@Html.ActionLink("Venta Usuarios", "UsuarioVentas", "Reporte", null, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Venta Producto importe", "ProductoImporteVentas", "Reporte", null, new { @class = "dropdown-item" })</li>
+                            </ul>
+
+                        </li>
                     }
                 }
 

@@ -1,56 +1,70 @@
 ﻿@model IEnumerable<Capa_Entidad.Carrito>
 
 @{
-    ViewBag.Title = "PagarCarrito";
+    ViewBag.Title = "Confirmar Pago";
 }
-
-<h2>PagarCarrito</h2>
-
-@using (Html.BeginForm())
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje as string))
 {
-    <div>
-        @Session["codigo"]
-        Cliente: @Html.TextBox("id", (string) @Session["codigo"], new { @class = "form-select" })
-        <br />
-        <button type="submit" class="btn btn-primary">Pagar</button> |
-        @Html.ActionLink("Modificar Carrito", "IndexCarrito") |
-        @Html.ActionLink("Seguir Comprando", "IndexProductoCliente", "Producto")
+    <div class="alert alert-info mt-4 shadow-sm" role="alert">
+        <i class="bi bi-info-circle"></i> @ViewBag.Mensaje
     </div>
 }
+<div class="container my-5">
+    <h2 class="text-primary fw-bold mb-4">💳 Confirmar Pago</h2>
 
-<table class="table">
-    <tr>
-        <th>Codigo </th>
-        <th>Nombre del Producto </th>
-        <th>Precio </th>
-        <th>Cantidad </th>
-        <th>Importe </th>
-        <th>Imagen</th>
-    </tr>
-
-    @foreach (var item in Model)
+    @using (Html.BeginForm())
     {
-        <tr>
-            <td>@item.cod_produc </td>
-            <td>@item.nom_pro </td>
-            <td>@item.precio </td>
-            <td>@item.cantidad </td>
-            <td>@item.importe </td>
-            <td>
-                <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")"
-                     alt="@item.nom_pro"
-                     style="width:60px;height:60px" />
-            </td>
-        </tr>
+        <div class="card p-4 shadow-sm mb-4">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Código del Cliente</label>
+                @Html.TextBox("id", (string)Session["codigo"], new { @class = "form-control", @readonly = "readonly" })
+            </div>
+            <div class="d-flex gap-2 flex-wrap">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-cash-coin"></i> Confirmar y Pagar
+                </button>
+                @Html.ActionLink("🛒 Modificar Carrito", "IndexCarrito", null, new { @class = "btn btn-outline-primary" })
+                @Html.ActionLink("🛍️ Seguir Comprando", "IndexProductoCliente", "Producto", null, new { @class = "btn btn-outline-secondary" })
+            </div>
+        </div>
     }
-    <tr>
-        <td colspan="4">Cantidad de Articulos: @ViewBag.contador</td>
-        <td colspan="2">Total a Pagar: @ViewBag.suma_importe</td>
-    </tr>
 
-</table>
-<div class="alert alert-info">
-   
-    @ViewBag.Mensaje
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle bg-white shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Importe</th>
+                    <th>Imagen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">@item.cod_produc</td>
+                        <td>@item.nom_pro</td>
+                        <td>S/ @item.precio.ToString("0.00")</td>
+                        <td>@item.cantidad</td>
+                        <td class="text-success fw-bold">S/ @item.importe.ToString("0.00")</td>
+                        <td>
+                            <img src="@Url.Content("~/Content/Productos/" + item.cod_produc + ".jpg")"
+                                 alt="@item.nom_pro"
+                                 class="img-thumbnail rounded"
+                                 style="width: 60px; height: 60px; object-fit: cover;" />
+                        </td>
+                    </tr>
+                }
+                <tr class="table-secondary fw-bold">
+                    <td colspan="4">🧾 Total de Artículos: <span class="text-primary">@ViewBag.contador</span></td>
+                    <td colspan="2">💰 Total a Pagar: <span class="text-success">S/ @ViewBag.suma_importe</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
 </div>
-

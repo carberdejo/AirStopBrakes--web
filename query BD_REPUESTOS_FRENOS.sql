@@ -406,4 +406,38 @@ GO
 SELECT 'BD CREADO EXITOSAMENTE'
 GO  
 select * from PRODUCTOS
+select * from Ventas
 select * from DetalleVenta
+SELECT * FROM USUARIO
+INSERT INTO Ventas VALUES ('V0006','2024-01-01','U0002',0,20)
+INSERT INTO DetalleVenta VALUES ('V0006','P0003',150,6)
+INSERT INTO DetalleVenta VALUES ('V0006','P0005',121,4)
+go
+
+CREATE OR ALTER PROCEDURE SP_REPORTE_VENTA_PRODUCTO
+@CANT INT
+AS
+	SELECT V.cod_usu,U.nom_usu,U.ape_usu, COUNT(*)as cantidad,MIN(V.fec_vta) AS firstVent,MAX(V.fec_vta) AS lastVent,SUM(DV.precio*DV.cantidad) AS importe
+	FROM VENTAS V
+	JOIN USUARIO U ON U.cod_usu = V.cod_usu JOIN DetalleVenta DV ON DV.num_vta = V.num_vta
+	GROUP BY  V.cod_usu,U.nom_usu,U.ape_usu
+	HAVING COUNT(*) >= @CANT
+GO
+
+EXEC SP_REPORTE_VENTA_PRODUCTO 1
+GO
+
+CREATE OR ALTER PROCEDURE SP_REPORTE_PRODUCTO
+@IMPORTE DECIMAL(7,2)
+AS
+	SELECT P.cod_produc,P.nom_pro,C.nom_cate,SUM(DV.cantidad) as cantidad,
+	SUM(DV.cantidad*DV.precio) as importe,COUNT(DV.num_vta) as venta
+	FROM PRODUCTOS P
+	JOIN DetalleVenta DV ON P.cod_produc = DV.cod_produc
+	JOIN CATEGORIA C ON P.cod_cate = C.cod_cate
+	GROUP BY P.cod_produc,P.nom_pro,C.nom_cate
+	HAVING SUM(DV.cantidad*DV.precio) >= @IMPORTE
+GO
+
+EXEC SP_REPORTE_PRODUCTO 400
+GO

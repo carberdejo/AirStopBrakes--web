@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Capa_Entidad.RepProducto>
+
+@{
+    ViewBag.Title = "ProductoImporteVentas";
+}
+
+<h2>ProductoImporteVentas</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row mb-4">
+        <div class="col-md-10 col-sm-8">
+            @Html.TextBox("imp", null, new { @class = "form-control", placeholder = "importe" })
+        </div>
+        <div class="col-md-2 col-sm-4 mt-sm-0 mt-2">
+            <button class="btn btn-outline-primary w-100">
+                <i class="bi bi-search"></i> Consultar
+            </button>
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th> Codigo </th>
+        <th> Nombre </th>
+        <th> Categoria </th>
+        <th> Cantidad </th>
+        <th> Importe </th>
+        <th> Venta </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_produc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_pro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_cate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.importe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.venta)
+            </td>
+        </tr>
+    }
+
+</table>
